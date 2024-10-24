@@ -1,5 +1,8 @@
-import os
 from flask_mysqldb import MySQL
+from config.config import Config
+from app import app
+
+import os
 class Config:
     MYSQL_HOST = 'localhost'
     MYSQL_USER = 'root'
@@ -7,6 +10,7 @@ class Config:
     MYSQL_DB = 'lms'
     SECRET_KEY = os.urandom(24)
     
-# def connectDB():
-#     mysql = MySQL()
-#     mysql.init_app(Config)
+
+mysql = MySQL()
+app.config.from_object(Config)
+mysql.init_app(app)
